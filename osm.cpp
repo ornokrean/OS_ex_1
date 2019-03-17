@@ -17,8 +17,12 @@ double osm_operation_time(unsigned int iterations)
     {
         iterations = 1000;
     }
-    for (int i = 0; i < iterations; i++)
+    for (int i = 0; i < iterations; i+=5)
     {
+        1 + 1;
+        1 + 1;
+        1 + 1;
+        1 + 1;
         1 + 1;
     }
     gettimeofday(&end, NULL);
@@ -37,8 +41,12 @@ double osm_function_time(unsigned int iterations)
     }
     struct timeval start, end;
     gettimeofday(&start, NULL);
-    for (int i = 0; i < iterations; ++i)
+    for (int i = 0; i < iterations; i+=5)
     {
+        func();
+        func();
+        func();
+        func();
         func();
     }
     gettimeofday(&end, NULL);
@@ -54,8 +62,12 @@ double osm_syscall_time(unsigned int iterations)
     }
     struct timeval start, end;
     gettimeofday(&start, NULL);
-    for (int i = 0; i < iterations; ++i)
+    for (int i = 0; i < iterations; i+=5)
     {
+        OSM_NULLSYSCALL;
+        OSM_NULLSYSCALL;
+        OSM_NULLSYSCALL;
+        OSM_NULLSYSCALL;
         OSM_NULLSYSCALL;
     }
     gettimeofday(&end, NULL);
