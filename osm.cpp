@@ -3,17 +3,33 @@
 //
 
 #include "osm.h"
+#include <sys/time.h>
 
 int osm_init(){
+
 }
 int osm_finalizer(){}
 
 double osm_operation_time(unsigned int iterations){
+    if (iterations==0){
+        iterations=1000;
+    }
     for (int i=0; i < iterations; i++){
         1+1;
     }
 }
-double osm_function_time(unsigned int iterations){}
 
-double osm_syscall_time(unsigned int iterations){}
+double osm_function_time(unsigned int iterations){
+    if (iterations==0){
+        iterations=1000;
+    }
+}
+
+double osm_syscall_time(unsigned int iterations){
+    if (iterations==0){
+        iterations=1000;
+    }
+
+
+}
 
