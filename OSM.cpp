@@ -10,6 +10,7 @@ int osm_finalizer(){}
 
 double osm_operation_time(unsigned int iterations){
     for (int i=0; i < iterations; i++){
+
         1+1;
     }
 }
