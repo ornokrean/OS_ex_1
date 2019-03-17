@@ -4,20 +4,20 @@
 double calc_total_time(unsigned int iterations, const timeval &start, const timeval &end);
 
 int osm_init()
-{}
+{ return 0;}
 
 int osm_finalizer()
-{}
+{ return 0;}
 
 double osm_operation_time(unsigned int iterations)
 {
     struct timeval start, end;
-    gettimeofday(&start, NULL);
+    gettimeofday(&start, nullptr);
     if (iterations == 0)
     {
         iterations = 1000;
     }
-    for (int i = 0; i < iterations; i+=5)
+    for (unsigned int i = 0; i < iterations; i+=5)
     {
         1 + 1;
         1 + 1;
@@ -25,7 +25,7 @@ double osm_operation_time(unsigned int iterations)
         1 + 1;
         1 + 1;
     }
-    gettimeofday(&end, NULL);
+    gettimeofday(&end, nullptr);
     return calc_total_time(iterations, start, end);
 }
 
@@ -40,8 +40,8 @@ double osm_function_time(unsigned int iterations)
         iterations = 1000;
     }
     struct timeval start, end;
-    gettimeofday(&start, NULL);
-    for (int i = 0; i < iterations; i+=5)
+    gettimeofday(&start, nullptr);
+    for (unsigned int i = 0; i < iterations; i+=5)
     {
         func();
         func();
@@ -49,7 +49,7 @@ double osm_function_time(unsigned int iterations)
         func();
         func();
     }
-    gettimeofday(&end, NULL);
+    gettimeofday(&end, nullptr);
     return calc_total_time(iterations, start, end);
 
 }
@@ -61,8 +61,8 @@ double osm_syscall_time(unsigned int iterations)
         iterations = 1000;
     }
     struct timeval start, end;
-    gettimeofday(&start, NULL);
-    for (int i = 0; i < iterations; i+=5)
+    gettimeofday(&start, nullptr);
+    for (unsigned int i = 0; i < iterations; i+=5)
     {
         OSM_NULLSYSCALL;
         OSM_NULLSYSCALL;
@@ -70,7 +70,7 @@ double osm_syscall_time(unsigned int iterations)
         OSM_NULLSYSCALL;
         OSM_NULLSYSCALL;
     }
-    gettimeofday(&end, NULL);
+    gettimeofday(&end, nullptr);
     return calc_total_time(iterations, start, end);
 }
 
