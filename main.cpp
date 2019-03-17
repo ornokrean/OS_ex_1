@@ -5,6 +5,6 @@
 int main()
 {
 
-
+    printf("%d",osm_operation_time(1000));
 
 }
