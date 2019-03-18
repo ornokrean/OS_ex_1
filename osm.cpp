@@ -4,6 +4,7 @@
 #define UNROLL_TIMES 5
 #define DEFAULT_ITER 1000
 #define TIME_FACT 100
+//FIXME
 
 double calc_total_time(unsigned int iterations, const timeval &start, const timeval &end);
 
@@ -117,6 +118,13 @@ double osm_syscall_time(unsigned int iterations)
     return calc_total_time(iterations, start, end) - test;
 }
 
+/**
+ * This function calculates the time difference between end and start.
+ * @param iterations the number of iterations made in the time par, we will divide by it
+ * @param start the start timestamp, a timeval
+ * @param end the end timestamp, a timeval
+ * @return double- the time difference
+ */
 double calc_total_time(unsigned int iterations, const timeval &start, const timeval &end)
 {
     return ((end.tv_sec - start.tv_sec) * 1000000.0
