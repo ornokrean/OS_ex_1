@@ -1,0 +1,16 @@
+erezuni, ornokrean
+Erez Hecht (311248959), Or Nokrean (206223166)
+EX: 1
+
+FILES:
+myfile.c -- a file with some code
+myfile.h -- a file with some headers
+
+REMARKS:
+These are some remarks that
+I want the graders to know
+about this submission.
+
+Assignment 1:
+WhatIDo opens a new file named OS2018 in the directory /Welcome/To (and creates them if they dont exist), writes 
+a line reminding us to read the course guidelines and proceeds to delete the file and the directories. 
