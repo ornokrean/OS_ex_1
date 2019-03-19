@@ -1,11 +1,14 @@
 #include <iostream>
 #include <sys/time.h>
 #include "osm.h"
+#include <chrono>
+#include <thread>
 
 int main()
 {
-    printf("%f\n",osm_operation_time(1000));
-    printf("%f\n",osm_function_time(1000));
-    printf("%f",osm_syscall_time(1000));
+    unsigned int iter = 1000000;
+    printf("%f\n",osm_operation_time(iter));
+    printf("%f\n",osm_function_time(iter));
+    printf("%f",osm_syscall_time(iter));
 
 }
