@@ -10,5 +10,4 @@ int main()
     printf("%f\n",osm_operation_time(iter));
     printf("%f\n",osm_function_time(iter));
     printf("%f",osm_syscall_time(iter));
-
 }

@@ -3,8 +3,7 @@ Erez Hecht (311248959), Or Nokrean (206223166)
 EX: 1
 
 FILES:
-myfile.c -- a file with some code
-myfile.h -- a file with some headers
+osm.cpp -- The library
 
 REMARKS:
 These are some remarks that

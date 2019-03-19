@@ -1,16 +1,16 @@
 #include "osm.h"
 #include <sys/time.h>
 #include <cmath>
-#include <iostream>
 
-
-#define UNROLL_TIMES 5
+#define UNROLL_TIMES 10
 #define DEFAULT_ITER 1000
 #define SEC_FACT 1000000000L
 #define USEC_FACT 1000L
-//FIXME
+#define ERROR_CODE 1
 
 double calc_total_time(unsigned int iterations, const timeval &start, const timeval &end);
+
+unsigned int check_iterations(unsigned int iterations);
 
 int osm_init()
 { return 0; }
@@ -20,77 +20,100 @@ int osm_finalizer()
 
 double osm_operation_time(unsigned int iterations)
 {
-    if (iterations == 0)
-    {
-        iterations = DEFAULT_ITER;
-    }
+    iterations = check_iterations(iterations);
     struct timeval start, end;
-    double total = 0;
-    int x = 0;
+    double x = 0;
+    if (gettimeofday(&start, nullptr))
+    {
+        return ERROR_CODE;
+    }
     for (unsigned int i = 0; i < iterations; i += UNROLL_TIMES)
     {
-        gettimeofday(&start, nullptr);
-        x++;
-        x++;
-        x++;
-        x++;
-        x++;
-        gettimeofday(&end, nullptr);
-        total += calc_total_time(iterations, start, end);
+        x = 1 + 1;
+        x = 1 + 1;
+        x = 1 + 1;
+        x = 1 + 1;
+        x = 1 + 1;
+        x = 1 + 1;
+        x = 1 + 1;
+        x = 1 + 1;
+        x = 1 + 1;
+        x = 1 + 1;
     }
+    if (gettimeofday(&end, nullptr))
+    {
+        return ERROR_CODE;
+    }
+    // avoid compiler issues:
+    x = 0;
+    iterations += (unsigned int) x;
 
-    return total / double(iterations);
+    return calc_total_time(iterations, start, end);
 }
 
 
-void func_to_call()
+void func()
 {}
 
 double osm_function_time(unsigned int iterations)
 {
-    if (iterations == 0)
-    {
-        iterations = DEFAULT_ITER;
-    }
-    struct timeval start, end;
-    double total = 0;
 
+    iterations = check_iterations(iterations);
+    struct timeval start, end;
+
+    if (gettimeofday(&start, nullptr))
+    {
+        return ERROR_CODE;
+    }
     for (unsigned int i = 0; i < iterations; i += UNROLL_TIMES)
     {
-        gettimeofday(&start, nullptr);
-        func_to_call();
-        func_to_call();
-        func_to_call();
-        func_to_call();
-        func_to_call();
-        gettimeofday(&end, nullptr);
-        total += calc_total_time(iterations, start, end);
+        func();
+        func();
+        func();
+        func();
+        func();
+        func();
+        func();
+        func();
+        func();
+        func();
     }
 
-    return total / double(iterations);
+    if (gettimeofday(&end, nullptr))
+    {
+        return ERROR_CODE;
+    }
+    return calc_total_time(iterations, start, end);
 }
+
+
 
 double osm_syscall_time(unsigned int iterations)
 {
-    if (iterations == 0)
-    {
-        iterations = DEFAULT_ITER;
-    }
+    iterations = check_iterations(iterations);
     struct timeval start, end;
-    double total = 0;
+    if (gettimeofday(&start, nullptr))
+    {
+        return ERROR_CODE;
+    }
     for (unsigned int i = 0; i < iterations; i += UNROLL_TIMES)
     {
-        gettimeofday(&start, nullptr);
         OSM_NULLSYSCALL;
         OSM_NULLSYSCALL;
         OSM_NULLSYSCALL;
         OSM_NULLSYSCALL;
         OSM_NULLSYSCALL;
-        gettimeofday(&end, nullptr);
-        total += calc_total_time(iterations, start, end);
+        OSM_NULLSYSCALL;
+        OSM_NULLSYSCALL;
+        OSM_NULLSYSCALL;
+        OSM_NULLSYSCALL;
+        OSM_NULLSYSCALL;
     }
-
-    return total / double(iterations);
+    if (gettimeofday(&end, nullptr))
+    {
+        return ERROR_CODE;
+    }
+    return calc_total_time(iterations, start, end);
 }
 
 /**
@@ -102,6 +125,24 @@ double osm_syscall_time(unsigned int iterations)
  */
 double calc_total_time(unsigned int iterations, const timeval &start, const timeval &end)
 {
-    return double(((end.tv_sec - start.tv_sec) * USEC_FACT) +
-                  ((end.tv_usec - start.tv_usec)));
+    return double(((end.tv_sec - start.tv_sec) * SEC_FACT) +
+                  ((end.tv_usec - start.tv_usec) * USEC_FACT)) / double(iterations);
+}
+
+/**
+ * this function validates the iteration given
+ * @param iterations the iterations to check
+ * @return a non-zero, round-up iteration number.
+ */
+unsigned int check_iterations(unsigned int iterations)
+{
+    if (iterations == 0)
+    {
+        iterations = DEFAULT_ITER;
+    }
+    if (iterations % UNROLL_TIMES)
+    {
+        iterations += UNROLL_TIMES - (iterations % UNROLL_TIMES);
+    }
+    return iterations;
 }
