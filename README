@@ -3,12 +3,13 @@ Erez Hecht (311248959), Or Nokrean (206223166)
 EX: 1
 
 FILES:
-osm.cpp -- The library
+osm.cpp -- The time measurement library
+graph.png - the graph of the average time measurements on different machines
+makefile- the makefile
+README - this file
 
 REMARKS:
-These are some remarks that
-I want the graders to know
-about this submission.
+Times were measured with 1000000 iterations (and checked on a range from 1000 to 100000000).
 
 Assignment 1:
 WhatIDo opens a new file named OS2018 in the directory /Welcome/To (and creates them if they dont exist), writes 
