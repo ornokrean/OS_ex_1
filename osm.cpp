@@ -43,7 +43,7 @@ double osm_operation_time(unsigned int iterations)
 }
 
 
-void func()
+void func_to_call()
 {}
 
 double osm_function_time(unsigned int iterations)
@@ -54,16 +54,15 @@ double osm_function_time(unsigned int iterations)
     }
     struct timeval start, end;
     double total = 0;
+
     for (unsigned int i = 0; i < iterations; i += UNROLL_TIMES)
     {
-
         gettimeofday(&start, nullptr);
-        printf("start %f,%f")
-        func();
-        func();
-        func();
-        func();
-        func();
+        func_to_call();
+        func_to_call();
+        func_to_call();
+        func_to_call();
+        func_to_call();
         gettimeofday(&end, nullptr);
         total += calc_total_time(iterations, start, end);
     }
@@ -103,6 +102,6 @@ double osm_syscall_time(unsigned int iterations)
  */
 double calc_total_time(unsigned int iterations, const timeval &start, const timeval &end)
 {
-    return double((end.tv_sec - start.tv_sec) * SEC_FACT +
-                  (end.tv_usec - start.tv_usec) * USEC_FACT);
+    return double(((end.tv_sec - start.tv_sec) * USEC_FACT) +
+                  ((end.tv_usec - start.tv_usec)));
 }
